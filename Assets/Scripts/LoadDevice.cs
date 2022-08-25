@@ -5,12 +5,27 @@ using UnityEngine;
 using System.IO;
 using System;
 
+
 public class LoadDevice : MonoBehaviour
 {
     public GameObject DeviceRegisterGroup;
+    public GameObject DeviceEdgeGroup;
     public GameObject Register;
+    public GameObject Edge;
     public TextAsset DeviceRegisterFile;
     public TextAsset DeviceTopologyFile;
+
+    void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width)
+    {
+        var offset = end - start;
+        var scale = new Vector3(width, offset.magnitude / 2.0f, width);
+        var position = start + (offset / 2.0f);
+
+        var cylinder = Instantiate(Edge, position, Quaternion.identity);
+        cylinder.transform.up = offset;
+        cylinder.transform.localScale = scale;
+        cylinder.transform.parent = DeviceEdgeGroup.transform;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +35,8 @@ public class LoadDevice : MonoBehaviour
         string[] register_list = register_text.Split('\n');
         int x_offset = -20;
         int z_offset = -15;
+        int x_interval = 10;
+        int z_interval = 10;
         foreach (string register_pos in register_list)
         {
             // unpack position
@@ -31,11 +48,26 @@ public class LoadDevice : MonoBehaviour
             GameObject register = Instantiate<GameObject>(Register);
             register.name = reg_id.ToString();
             register.transform.parent = DeviceRegisterGroup.transform;
-            register.transform.position = new Vector3(x_pos * 10 + x_offset, 0, z_pos * 10 + z_offset);
+            register.transform.position = new Vector3(x_pos * x_interval + x_offset, 0, z_pos * z_interval + z_offset);
             Text reg_text = register.GetComponentInChildren<Text>();
             reg_text.text = "Physical " + reg_id.ToString();
         }
-        
+
+        // initialize device edges
+        string register_topology_text = DeviceTopologyFile.text;
+        string[] register_edge_list = register_topology_text.Split('\n');
+        foreach (string edge in register_edge_list)
+        {
+            // unpack edge
+            string[] id_list = edge.Split(' ');
+            int idx0 = Int32.Parse(id_list[0]);
+            int idx1 = Int32.Parse(id_list[1]);
+
+            // create edge
+            Vector3 pos0 = DeviceRegisterGroup.transform.GetChild(idx0 + 1).position;
+            Vector3 pos1 = DeviceRegisterGroup.transform.GetChild(idx1 + 1).position;
+            CreateCylinderBetweenPoints(pos0, pos1, 2);
+        }
 
     }
 
