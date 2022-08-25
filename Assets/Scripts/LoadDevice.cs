@@ -15,7 +15,7 @@ public class LoadDevice : MonoBehaviour
     public TextAsset DeviceRegisterFile;
     public TextAsset DeviceTopologyFile;
 
-    void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width)
+    void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width, int idx0, int idx1)
     {
         var offset = end - start;
         var scale = new Vector3(width, offset.magnitude / 2.0f, width);
@@ -25,6 +25,7 @@ public class LoadDevice : MonoBehaviour
         cylinder.transform.up = offset;
         cylinder.transform.localScale = scale;
         cylinder.transform.parent = DeviceEdgeGroup.transform;
+        cylinder.name = idx0.ToString() + "-" + idx1.ToString();
     }
 
     // Start is called before the first frame update
@@ -64,9 +65,9 @@ public class LoadDevice : MonoBehaviour
             int idx1 = Int32.Parse(id_list[1]);
 
             // create edge
-            Vector3 pos0 = DeviceRegisterGroup.transform.GetChild(idx0 + 1).position;
-            Vector3 pos1 = DeviceRegisterGroup.transform.GetChild(idx1 + 1).position;
-            CreateCylinderBetweenPoints(pos0, pos1, 2);
+            Vector3 pos0 = DeviceRegisterGroup.transform.GetChild(idx0).position;
+            Vector3 pos1 = DeviceRegisterGroup.transform.GetChild(idx1).position;
+            CreateCylinderBetweenPoints(pos0, pos1, 2, idx0, idx1);
         }
 
     }
