@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KeyboardHandler : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class KeyboardHandler : MonoBehaviour
     private int[] logical2phsyical;
     private string highlighted_edge_name = null;
     private bool initialized = false;
+
+    // reset related
+    public string CurrentSceneName;
 
 
     void Update()
@@ -69,15 +73,20 @@ public class KeyboardHandler : MonoBehaviour
         }
     }
 
+    public void ReloadCurrentScene()
+    {
+        SceneManager.LoadScene(CurrentSceneName);
+    }
+
     public void HandleVisualizeRequest()
     {
         // parse input
         raw_execution_history = ExecutionHistoryInput.text;
-        string[] _tmp_execution_history = raw_execution_history.Split('\n');
+        string[] _tmp_execution_history = raw_execution_history.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
         num_registers = Int32.Parse(_tmp_execution_history[0].Split(' ')[0]);
         num_qubits = Int32.Parse(_tmp_execution_history[0].Split(' ')[1]);
         num_steps = Int32.Parse(_tmp_execution_history[3]);
-        Debug.Assert(_tmp_execution_history.Length == num_steps + 5);
+        Debug.Assert(_tmp_execution_history.Length == num_steps + 4);
         // execution history
         execution_history = new string[num_steps];
         for (int i = 4; i < 4 + num_steps; ++i)
