@@ -19,6 +19,7 @@ public class LoadDevice : MonoBehaviour
     public int z_offset = -15;      // Q20: -15, Q65 -20
     public int x_interval = 10;     // Q20: 10,  Q65 5
     public int z_interval = 10;     // Q20: 10,  Q65 5
+    public bool TextUseAbbrevation = false;
 
     void CreateCylinderBetweenPoints(Vector3 start, Vector3 end, float width, int idx0, int idx1)
     {
@@ -52,7 +53,13 @@ public class LoadDevice : MonoBehaviour
             register.transform.parent = DeviceRegisterGroup.transform;
             register.transform.position = new Vector3(x_pos * x_interval + x_offset, 0, z_pos * z_interval + z_offset);
             Text reg_text = register.GetComponentInChildren<Text>();
-            reg_text.text = "Physical " + reg_id.ToString();
+            if (TextUseAbbrevation)
+            {
+                reg_text.text = "P " + reg_id.ToString();
+            } else
+            {
+                reg_text.text = "Physical " + reg_id.ToString();
+            }    
         }
 
         // initialize device edges

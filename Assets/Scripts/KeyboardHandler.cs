@@ -12,6 +12,7 @@ public class KeyboardHandler : MonoBehaviour
     public GameObject RCanvas;
     private bool is_panel_visible = true;
     private bool is_r_canvas_visible = true;
+    public bool TextUseAbbrevation = false;
 
     // visualization related
     public InputField ExecutionHistoryInput;
@@ -180,7 +181,15 @@ public class KeyboardHandler : MonoBehaviour
         // set floating canvas
         for (int idx = 0; idx < num_registers; ++idx)
         {
-            RegisterGroup.transform.GetChild(idx).GetComponentInChildren<Text>().text = "Physical " + idx + "\nLogical " + physical2logical[idx];
+            string cur_text;
+            if (TextUseAbbrevation)
+            {
+                cur_text = "P " + idx + "\nL " + physical2logical[idx];
+            } else
+            {
+                cur_text = "Physical " + idx + "\nLogical " + physical2logical[idx];
+            }
+            RegisterGroup.transform.GetChild(idx).GetComponentInChildren<Text>().text = cur_text;
         }
     }
 }

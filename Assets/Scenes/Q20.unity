@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4430032, g: 0.49219626, b: 0.571926, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -472,6 +472,7 @@ MonoBehaviour:
   z_offset: -15
   x_interval: 10
   z_interval: 10
+  TextUseAbbrevation: 0
 --- !u!4 &668859170
 Transform:
   m_ObjectHideFlags: 0
@@ -688,7 +689,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 9e-43, y: 1.02e-43, z: 4.5904e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -699,13 +700,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.86602545, y: 0, z: 0, w: 0.49999994}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1042539366}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 120, y: 0, z: 0}
 --- !u!1 &805156438
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 1884330575}
   RCanvas: {fileID: 1817798033}
+  TextUseAbbrevation: 0
   ExecutionHistoryInput: {fileID: 1814352187}
   RegisterGroup: {fileID: 902234855}
   EdgeGroup: {fileID: 1109091941}
@@ -919,7 +921,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
