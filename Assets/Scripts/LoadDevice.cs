@@ -34,10 +34,10 @@ public class LoadDevice : MonoBehaviour
         // initialize registers
         string register_text = DeviceRegisterFile.text;
         string[] register_list = register_text.Split('\n');
-        int x_offset = -20;
-        int z_offset = -15;
-        int x_interval = 10;
-        int z_interval = 10;
+        int x_offset = -20;     // Q20: -20, Q65 -25
+        int z_offset = -15;     // Q20: -15, Q65 -20
+        int x_interval = 10;     // Q20: 10,  Q65 5
+        int z_interval = 10;     // Q20: 10,  Q65 5
         foreach (string register_pos in register_list)
         {
             // unpack position
